@@ -7,7 +7,7 @@ package proyecto.biblioteca;
 
 /**
  *
- * @author Lorena
+ * @author Java
  */
 public class Gestor_Estado {
     
