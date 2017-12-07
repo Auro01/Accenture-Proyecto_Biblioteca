@@ -34,11 +34,24 @@ public class Gestor_Libro {
          System.out.println("Existencias del libro agregado correctamente");
      }
      
-     //metodo borrar libro
-     public boolean borrarLibro(int id){
+     //metodo borrar existencias de los libros
+     public boolean borraExistenciaLibros(int id){
          for(Libro libro: libros){
                 if(id == libro.getiISBN()){ 
                  System.out.println(libro.getsNombre() + " se han borrado las exitencias");
+                 libros.remove(libro);
+             }
+        }
+        System.out.println("No existe el libro con id: " + id);
+        return false;
+     }
+     
+     //Borrrar un libro en especifico en una biblioteca por id de libro y id de la biblioteca
+     public boolean borrarLibro(int idLibro, int idBiblioteca){
+         for(Libro libro: libros){
+             //comparar ids con los del libro y biblioteca a la que pertenece
+                if(idLibro == libro.getiISBN() & idBiblioteca == libro.getBibPertenezco().iIdBiblioteca()){ 
+                 System.out.println("Libro borrado de sucursal correctamente");
                  libros.remove(libro);
                  return true;
              }
@@ -46,6 +59,8 @@ public class Gestor_Libro {
         System.out.println("No existe el libro con id: " + id);
         return false;
      }
+     
+     //Mostrar libro 
      public void mostrarLibros(){
          for(Libro libro: libros){
              libro.Imprimir();
