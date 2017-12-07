@@ -105,6 +105,6 @@ public class Estado {
     * Metodo para imprimir la informacion perrtinente al objecto
      */
     public void Imprimir(){
-        System.out.println("Id: " + this.getiIdEstado() + "Nombre: " + this.getsNombreEstado());
+        System.out.println("Id: " + this.getiIdEstado() + "  Nombre: " + this.getsNombreEstado());
     }
 }

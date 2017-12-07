@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto.biblioteca;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,20 +13,29 @@ import java.util.Scanner;
  */
 public class Gestor_Libro {
      
-     ArrayList<Libro> libros = new ArrayList<>();
+     private ArrayList<Libro> libros;
      
-     Gestor_Biblioteca gestorBiblioteca = new Gestor_Biblioteca();
-    
-     
+     private Gestor_Biblioteca gestorBiblioteca;
+
+    public Gestor_Libro() {
+        this.libros = new ArrayList<Libro>();
+        this.gestorBiblioteca = new Gestor_Biblioteca();
+    }
+
+    public Gestor_Libro(ArrayList<Libro> libros, Gestor_Biblioteca gestorBiblioteca) {
+        this.libros = libros;
+        this.gestorBiblioteca = gestorBiblioteca;
+    }
+
     //Método para agregar Libro
      public void agregarLibro(Libro libro){
          //Verificar que existan bibliotecas
-        if(gestorBiblioteca.bibliotecas.size() < 1){
+        if(gestorBiblioteca.getListBiblioteca().size() < 1){
              System.out.println("No puedes agregar un Libro sin bibliotecas :v");
              return;
          }
          //Recorrer las bibliotecas actuales y guardar el libro en cada un
-         for(Biblioteca biblioteca: gestorBiblioteca.bibliotecas){
+         for(Biblioteca biblioteca: gestorBiblioteca.getListBiblioteca()){
              libro.setBibPertenezco(biblioteca);
              libros.add(libro);
          }
@@ -50,13 +58,13 @@ public class Gestor_Libro {
      public boolean borrarLibro(int idLibro, int idBiblioteca){
          for(Libro libro: libros){
              //comparar ids con los del libro y biblioteca a la que pertenece
-                if(idLibro == libro.getiISBN() & idBiblioteca == libro.getBibPertenezco().iIdBiblioteca()){ 
+                if(idLibro == libro.getiISBN() & idBiblioteca == libro.getBibPertenezco().getiIdBiblioteca()){
                  System.out.println("Libro borrado de sucursal correctamente");
                  libros.remove(libro);
                  return true;
              }
         }
-        System.out.println("No existe el libro con id: " + id);
+        System.out.println("No existe el libro con id: " + idLibro);
         return false;
      }
      
@@ -90,7 +98,20 @@ public class Gestor_Libro {
          
         
      }
-      
-     
-     
-  }
+
+    public ArrayList<Libro> getLibros() {
+        return libros;
+    }
+
+    public Gestor_Biblioteca getGestorBiblioteca() {
+        return gestorBiblioteca;
+    }
+
+    public void setLibros(ArrayList<Libro> libros) {
+        this.libros = libros;
+    }
+
+    public void setGestorBiblioteca(Gestor_Biblioteca gestorBiblioteca) {
+        this.gestorBiblioteca = gestorBiblioteca;
+    }
+}

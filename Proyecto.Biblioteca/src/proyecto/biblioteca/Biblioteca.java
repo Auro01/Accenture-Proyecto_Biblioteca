@@ -185,4 +185,41 @@ public class Biblioteca {
         System.out.println("Id: " + this.getiIdBiblioteca() + "Nombre: " + this.getsNombre() + "Domcilio: " +
                 this.getsDomicilio() + "Estado: " + this.getEstPertenezco().getsNombreEstado());
     }
+
+    /*
+    * Imprimir
+    *
+    * Metodo para imprimir la informacion perrtinente al objecto
+     */
+    public void ImprimirLibrosDisponibles(){
+            System.out.println("Libros Disponbles:");
+
+            for (Libro actual : this.gLibLibrosActuales.getLibros()) {
+                if (actual.isbRentado()) {
+                    actual.Imprimir();
+                }
+            }
+        }
+
+
+
+    /*
+    * Imprimir
+    *
+    * Metodo para imprimir la informacion perrtinente al objecto
+     */
+    public void ImprimirLibrosRentados(){
+        if (this.isbAlgoRentado()) {
+            System.out.println("Libros Disponbles:");
+
+            for (Libro actual : this.gLibLibrosActuales.getLibros()) {
+                if (actual.isbRentado()) {
+                    actual.Imprimir();
+                }
+            }
+        }
+        else {
+            System.out.println("No hay ningun libro rentado");
+        }
+    }
 }

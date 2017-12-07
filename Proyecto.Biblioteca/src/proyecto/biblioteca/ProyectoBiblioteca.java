@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto.biblioteca;
 
 import java.util.Scanner;
 
@@ -53,9 +52,21 @@ public class ProyectoBiblioteca {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        int iIDEstado;
+        String sDomicilioNuevaBiblioteca,sNombreNuevaBiblioteca;
+        int iIdBibliotecaNuevaBiblioteca;
+        Biblioteca bibBliotecaAuxiliar = new Biblioteca();
+        Scanner  scanEscaner = new Scanner(System.in);
         ProyectoBiblioteca pBiblioteca = new ProyectoBiblioteca();
         pBiblioteca.menu();
+
+        Gestor_Estado geEstadosActuales = new Gestor_Estado();
+        try {
+            geEstadosActuales = ManejadorPersitencia.cargarDatos();
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
         while(pBiblioteca.accion !=3 ){
             switch(pBiblioteca.accion){
                 case 1:
@@ -64,11 +75,92 @@ public class ProyectoBiblioteca {
                     break;
                 case 2:
                     System.out.println("Escribe aquí");
-                    pBiblioteca.menu();
+                    pBiblioteca.menuGestorLibros();
                     break;
                     //Escribe aquí :p
                 case 4:
                     System.out.println("Escribe");
+                    Estado estNuevo = new Estado();
+                    String sNombreEstado;
+
+                    //Tomar Datos
+                    System.out.println("Ingrese el Nombre del estado");
+                    sNombreEstado = scanEscaner.nextLine();
+                    System.out.println("Ingrese el Id del estado");
+                    iIDEstado = Integer.parseInt(scanEscaner.nextLine());
+
+                    //Establecer datos al nuevo estado
+                    estNuevo.setsNombreEstado(sNombreEstado);
+                    estNuevo.setiIdEstado(iIDEstado);
+                    //agregamos el estado
+                    estNuevo.Imprimir();
+                    geEstadosActuales.agregarE(estNuevo);
+                    break;
+                case 5:
+                    System.out.println("Escribe");
+                    //Tomar Datos
+                    System.out.println("Ingrese el id del estado");
+                    iIDEstado = Integer.parseInt(scanEscaner.nextLine());
+
+                    geEstadosActuales.eliminarE(iIDEstado);
+                    break;
+
+                case 6:
+                    System.out.println("Escribe");
+                    System.out.println("Estados Disponibles");
+                    geEstadosActuales.ImprimirEstados();
+                    System.out.println("Ingrese el ID del estado al que desea agregar biblioteca");
+                    iIDEstado = Integer.parseInt(scanEscaner.nextLine());
+                    estNuevo = geEstadosActuales.selecionarEstado(iIDEstado);
+
+                    System.out.println("Ingrese el ID de la Biblioteca");
+                    iIdBibliotecaNuevaBiblioteca = Integer.parseInt(scanEscaner.nextLine());
+                    System.out.println("Ingrese el Nombre de la Biblioteca");
+                    sNombreNuevaBiblioteca = scanEscaner.nextLine();
+                    System.out.println("Ingrese el Domicilio de la Biblioteca");
+                    sDomicilioNuevaBiblioteca = scanEscaner.nextLine();
+
+                    bibBliotecaAuxiliar = new Biblioteca();
+                    bibBliotecaAuxiliar.setiIdBiblioteca(iIdBibliotecaNuevaBiblioteca);
+                    bibBliotecaAuxiliar.setsDomicilio(sDomicilioNuevaBiblioteca);
+                    bibBliotecaAuxiliar.setsNombre(sNombreNuevaBiblioteca);
+                    bibBliotecaAuxiliar.setEstPertenezco(estNuevo);
+                    try {
+                        estNuevo.getgBibBibliotecasActuales().agregarBiblioteca(bibBliotecaAuxiliar);
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
+                    break;
+
+                case 7:
+                    System.out.println("Escribe");
+                    System.out.println("Estados Disponibles");
+                    geEstadosActuales.ImprimirEstados();
+                    System.out.println("Ingrese el ID del estado donde esta la biblioteca que desea edita");
+                    iIDEstado = Integer.parseInt(scanEscaner.nextLine());
+                    estNuevo = geEstadosActuales.selecionarEstado(iIDEstado);
+
+                    System.out.println("Ingrese el ID de la Biblioteca");
+                    iIdBibliotecaNuevaBiblioteca = Integer.parseInt(scanEscaner.nextLine());
+
+                    estNuevo.getgBibBibliotecasActuales().editarNombreBiblioteca(iIdBibliotecaNuevaBiblioteca);
+                    estNuevo.getgBibBibliotecasActuales().editarDomicilioBiblioteca(iIdBibliotecaNuevaBiblioteca);
+
+                    break;
+                case 8:
+                    System.out.println("Escribe");
+                    System.out.println("Estados Disponibles");
+                    geEstadosActuales.ImprimirEstados();
+                    System.out.println("Ingrese el ID del estado donde esta la biblioteca que desea borrar");
+                    iIDEstado = Integer.parseInt(scanEscaner.nextLine());
+                    estNuevo = geEstadosActuales.selecionarEstado(iIDEstado);
+
+                    System.out.println("Ingrese el ID de la Biblioteca");
+                    iIdBibliotecaNuevaBiblioteca = Integer.parseInt(scanEscaner.nextLine());
+
+                    estNuevo.getgBibBibliotecasActuales().borrarBlioteca(iIdBibliotecaNuevaBiblioteca);
+
                     break;
                 default:
                     System.out.println("No escribiste nada papu");
@@ -76,10 +168,10 @@ public class ProyectoBiblioteca {
                     break;
             }
         }
-        
+        ManejadorPersitencia.guardarDatos(geEstadosActuales);
         System.out.println("Gracias por venir :p");
         
-        
+
         // TODO code application logic here
     }
     
