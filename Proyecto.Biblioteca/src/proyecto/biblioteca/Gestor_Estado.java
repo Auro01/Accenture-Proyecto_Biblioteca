@@ -19,9 +19,9 @@ ArrayList <Estado> listadeestados = new ArrayList<>();
     
 public void eliminarE(int id){
        int index = 0;
-       for(Estado  estado: listadeestados){
-           if(id ==estado.getId()){ 
-               System.out.println(estado.getNombreEstado() + " se ha removido");
+       for(Estado estActual: listadeestados){
+           if(id ==estActual.getId()){ 
+               System.out.println(estActual.getNombreEstado() + " se ha removido");
                listadeestados.remove(index);
                return;
            }
@@ -33,9 +33,9 @@ public void eliminarE(int id){
     
     public void mostrarE(Estado est){  
 
-        for (Estado esEnTurno : listadeestadoss) { 
+        for (Estado estActual : listadeestadoss) { 
                     String getsNombreEstado;
-                    if(esEnTurno == sNombreEstado){  
+                    if(estActual == sNombreEstado){  
                        System.out.println(getsNombreEstado(listadeestadoss));    
                     }
         }
