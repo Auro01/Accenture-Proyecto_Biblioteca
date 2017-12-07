@@ -17,14 +17,19 @@ ArrayList <Estado> listadeestados = new ArrayList<>();
            listadeestados.add(est);
     }
     
-    public void eliminarE(Estado est){  
-
-          for (Estado sNombreEstado : listadeestados) { 
-              if(sNombreEstado == est){   
-                   listadeempleados.remove(est); 
-              }
-          }
-    }
+public void eliminarE(int id){
+       int index = 0;
+       for(Estado  estado: listadeestados){
+           if(id ==estado.getId()){ 
+               System.out.println(estado.getNombreEstado() + " se ha removido");
+               listadeestados.remove(index);
+               return;
+           }
+           index++;
+       }
+       System.out.println("No existe el estado con id: " + id);
+       return;
+   }
     
     public void mostrarE(Estado est){  
 
