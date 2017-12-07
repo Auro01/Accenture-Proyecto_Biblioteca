@@ -9,7 +9,7 @@ package proyecto.biblioteca;
  *
  * @author Lorena
  */
-public class GestorEstado {
+public class Gestor_Estado {
     
 ArrayList <Estado> listadeestados = new ArrayList<>();
 
