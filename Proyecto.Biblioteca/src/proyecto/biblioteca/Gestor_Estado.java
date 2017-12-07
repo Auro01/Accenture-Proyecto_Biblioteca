@@ -7,8 +7,32 @@ package proyecto.biblioteca;
 
 /**
  *
- * @author Java
+ * @author Lorena
  */
-public class Gestor_Estado {
+public class GestorEstado {
     
+ArrayList <Estado> listadeestados = new ArrayList<>();
+
+    public void agregarE(Estado est){ 
+           listadeestados.add(est);
+    }
+    
+    public void eliminarE(Estado est){  
+
+          for (Estado sNombreEstado : listadeestados) { 
+              if(sNombreEstado == est){   
+                   listadeempleados.remove(est); 
+              }
+          }
+    }
+    
+    public void mostrarE(Estado est){  
+
+        for (Estado esEnTurno : listadeestadoss) { 
+                    String getsNombreEstado;
+                    if(esEnTurno == sNombreEstado){  
+                       System.out.println(getsNombreEstado(listadeestadoss));    
+                    }
+        }
+    }       
 }
